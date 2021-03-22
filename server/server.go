@@ -57,7 +57,6 @@ func addUser(req *http.Request) {
 		return
 	}
 	userDb = append(userDb, newUser)
-	return
 }
 
 func getUser(path string, w http.ResponseWriter) {
@@ -74,7 +73,6 @@ func getUser(path string, w http.ResponseWriter) {
 	if err != nil {
 		log.Printf("Serving \"GET /users/%s\", failed to json encode user\n", path)
 	}
-	return
 }
 
 func getAll(w http.ResponseWriter) {
@@ -86,5 +84,4 @@ func getAll(w http.ResponseWriter) {
 	if err != nil {
 		log.Println("Serving \"GET /users/\", json encode failed")
 	}
-	return
 }
