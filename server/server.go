@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"flag"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
@@ -23,12 +24,40 @@ var queryUsers *sql.Stmt
 var queryUser *sql.Stmt
 var insertUser *sql.Stmt
 
+var listenAddress = flag.String("addr",
+	"127.0.0.1",
+	"Address on which the server listens for requests")
+
+var listenPort = flag.Int("port",
+	8444,
+	"Port on which the server listens for requests")
+
+var databasePort = flag.Int("dbport",
+	3306,
+	"Port for reaching the database")
+
+var databaseAddress = flag.String("dbaddr",
+	"127.0.0.1",
+	"Address of the database server")
+
+var databaseUser = flag.String("dbuser",
+	"root",
+	"User for database login")
+
+var databasePassword = flag.String("dbpass",
+	"",
+	"Password for database login")
+var databaseName = flag.String("dbname",
+	"users",
+	"Name of the user database")
+
 func main() {
+	flag.Parse()
 
 	database = initDatabase()
 
 	http.HandleFunc("/users/", userAPI)
-	err := http.ListenAndServe("0.0.0.0:8477", nil)
+	err := http.ListenAndServe(*listenAddress+":"+strconv.Itoa(*listenPort), nil)
 	if err != nil {
 		log.Fatalln("Failed to start server")
 	}
@@ -41,7 +70,9 @@ func main() {
 }
 
 func initDatabase() *sql.DB {
-	db, err := sql.Open("mysql", "root:password@tcp(172.17.0.2)/users")
+	db, err := sql.Open("mysql",
+		*databaseUser+":"+*databasePassword+"@tcp("+*databaseAddress+":"+
+			strconv.Itoa(*databasePort)+")/"+*databaseName)
 	if err != nil || db.Ping() != nil {
 		log.Fatalln("Failed to open database")
 	}

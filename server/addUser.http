@@ -7,3 +7,11 @@ Content-Type: application/json
   "Password":  "geheim"
 }
 ###
+PUT http://localhost:8477/users/
+Content-Type: application/json
+
+{
+  "Name" :  "test_user",
+  "Email":  "test_user@gmail.com",
+  "Password":  "zu"
+}
