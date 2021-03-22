@@ -1,4 +1,4 @@
-PUT http://localhost:8477/users/
+PUT http://localhost:8444/users/
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
   "Password":  "geheim"
 }
 ###
-PUT http://localhost:8477/users/
+PUT http://localhost:8444/users/
 Content-Type: application/json
 
 {
