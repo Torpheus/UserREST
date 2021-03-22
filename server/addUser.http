@@ -1,0 +1,10 @@
+PUT http://localhost:8477/users/
+Content-Type: application/json
+
+{
+  "Name" :  "jonas",
+  "Email":  "jonas.gastecker@sz-ybbs.ac.at",
+  "Password":  null
+}
+
+###
