@@ -19,7 +19,7 @@ func initDatabase() *sql.DB {
 	if err != nil || db.Ping() != nil {
 		log.Fatalln("Failed to open database")
 	}
-	// See "Important settings" section.
+
 	db.SetConnMaxLifetime(time.Minute * 3)
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(10)

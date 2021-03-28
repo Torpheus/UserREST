@@ -72,7 +72,7 @@ func userAPI(w http.ResponseWriter, req *http.Request) {
 		} else {
 			getUser(path, w)
 		}
-	case http.MethodPut:
+	case http.MethodPost:
 		addUser(req)
 	}
 }
